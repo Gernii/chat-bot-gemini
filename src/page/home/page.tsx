@@ -3,6 +3,7 @@
 import { ChatBubble } from "@/components/chat-bubble";
 import { ChatMessages } from "@/page/home/chat-messages";
 import { useMessages } from "@/page/home/use-messages";
+import { Input } from "./input";
 
 export const Page = () => {
     const { handleFormSubmit, isMessaging, messageStream, messages, chatContainerRef } =
@@ -17,14 +18,15 @@ export const Page = () => {
                 {messageStream && <ChatBubble message={messageStream} possition="left" />}
             </div>
             <form
-                className="w-full py-4 flex-shrink-0 flex gap-x-2 sticky bottom-0 inset-0 bg-slate-950"
+                className="w-full py-4 flex-shrink-0 flex gap-x-2 sticky bottom-0 inset-0 bg-slate-950 items-end"
                 onSubmit={handleFormSubmit}
             >
-                <input
+                {/* <input
                     className="flex-grow px-4 py-2 rounded-lg bg-slate-600 disabled:bg-slate-900"
                     disabled={isMessaging}
                     name="message"
-                />
+                /> */}
+                <Input disabled={isMessaging} />
                 <button
                     type="submit"
                     className="flex-shrink-0 px-4 py-2 bg-slate-600 rounded-lg disabled:bg-slate-900"

@@ -25,3 +25,5 @@ Bot: "While I understand your interest in the weather, as an English Grammar Tut
 Remember to always be helpful and encouraging, but maintain your role as a Grammar Tutor.`;
 
 export const CHAT_API_LOCAL = "/api/chat";
+
+export const LINE_HEIGHT = 25;
