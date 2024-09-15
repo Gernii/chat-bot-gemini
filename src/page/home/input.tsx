@@ -1,4 +1,4 @@
-import { FC, KeyboardEventHandler, useRef } from "react";
+import { type FC, type KeyboardEventHandler, useRef } from "react";
 import { LINE_HEIGHT } from "./constants";
 
 export interface InputProps {
@@ -19,16 +19,10 @@ export const Input: FC<InputProps> = ({ disabled }) => {
 
         textAreaRef.current.style.setProperty("height", "auto");
         if (textAreaRef.current.scrollHeight >= LINE_HEIGHT * 5) {
-            textAreaRef.current.style.setProperty(
-                "height",
-                `${LINE_HEIGHT * 5}px`
-            );
+            textAreaRef.current.style.setProperty("height", `${LINE_HEIGHT * 5}px`);
             return;
         }
-        textAreaRef.current.style.setProperty(
-            "height",
-            `${textAreaRef.current.scrollHeight}px`
-        );
+        textAreaRef.current.style.setProperty("height", `${textAreaRef.current.scrollHeight}px`);
     };
 
     return (

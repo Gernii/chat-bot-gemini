@@ -6,26 +6,16 @@ import { useMessages } from "@/page/home/use-messages";
 import { Input } from "./input";
 
 export const Page = () => {
-    const {
-        handleFormSubmit,
-        isMessaging,
-        messageStream,
-        messages,
-        chatContainerRef,
-    } = useMessages();
+    const { handleFormSubmit, isMessaging, messageStream, messages, chatContainerRef } =
+        useMessages();
 
     return (
         <div className="h-[100dvh] max-w-4xl mx-auto px-4 flex flex-col">
             <div className="flex-grow pb-20" ref={chatContainerRef}>
-                <ChatBubble
-                    message="Hello, how can i help you"
-                    possition="left"
-                />
+                <ChatBubble message="Hello, how can i help you" possition="left" />
                 <ChatMessages messages={messages} />
 
-                {messageStream && (
-                    <ChatBubble message={messageStream} possition="left" />
-                )}
+                {messageStream && <ChatBubble message={messageStream} possition="left" />}
             </div>
             <form
                 className="w-full py-4 flex-shrink-0 flex gap-x-2 sticky bottom-0 inset-0 bg-slate-950 items-end"
