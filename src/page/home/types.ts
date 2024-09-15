@@ -1,6 +1,8 @@
 import type { Content } from "@google/generative-ai";
 
-export type ChatMessage = Content;
+export interface ChatMessage extends Pick<Content, "parts"> {
+    role: "user" | "model";
+}
 
 export interface MessageResponse {
     message: string;
