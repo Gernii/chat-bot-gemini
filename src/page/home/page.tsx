@@ -5,13 +5,15 @@ import { ChatMessages } from "@/page/home/chat-messages";
 import { useMessages } from "@/page/home/use-messages";
 
 export const Page = () => {
-    const { handleFormSubmit, isMessaging, messageStream, messages } = useMessages();
+    const { handleFormSubmit, isMessaging, messageStream, messages, chatContainerRef } =
+        useMessages();
 
     return (
         <div className="h-[100dvh] max-w-4xl mx-auto px-4 flex flex-col">
-            <div className="flex-grow">
+            <div className="flex-grow pb-20" ref={chatContainerRef}>
                 <ChatBubble message="Hello, how can i help you" possition="left" />
                 <ChatMessages messages={messages} />
+
                 {messageStream && <ChatBubble message={messageStream} possition="left" />}
             </div>
             <form
