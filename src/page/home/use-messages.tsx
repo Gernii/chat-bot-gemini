@@ -1,4 +1,10 @@
-import { type FormEventHandler, useCallback, useEffect, useState } from "react";
+import {
+    type FormEventHandler,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 import type { ChatMessage, MessageResponse } from "./types";
 import { SSE } from "sse.js";
 import { CHAT_API_LOCAL, END_MESSAGE } from "./constants";
@@ -6,6 +12,25 @@ export const useMessages = () => {
     const [messages, setMessages] = useState<ChatMessage[]>([]);
     const [messageStream, setMessageStream] = useState<string>();
     const [isMessaging, setIsMessaging] = useState(false);
+
+    const chatContainerRef = useRef<HTMLDivElement>(null);
+
+    /**
+     * This function help to scroll to the bottom of the chat container
+     * @returns void
+     */
+    const handleMessageChangeScroll = () => {
+        if (!chatContainerRef.current) {
+            return;
+        }
+        setTimeout(() => {
+            chatContainerRef.current?.scrollIntoView({
+                behavior: "smooth",
+                block: "end",
+                inline: "nearest",
+            });
+        }, 100);
+    };
 
     const handleFormSubmit: FormEventHandler<HTMLFormElement> = useCallback(
         (e) => {
@@ -35,6 +60,9 @@ export const useMessages = () => {
                 return [...initMessages];
             });
 
+            // ? We needto scroll down after user message set
+            handleMessageChangeScroll();
+
             const sse = new SSE(CHAT_API_LOCAL, {
                 headers: {
                     "Content-Type": "application/json",
@@ -61,9 +89,12 @@ export const useMessages = () => {
                     }
                     return `${prev}${data.message}`;
                 });
+
+                // ? We need to scroll down after model message set
+                handleMessageChangeScroll();
             };
         },
-        [messages],
+        [messages]
     );
 
     useEffect(() => {
@@ -90,6 +121,8 @@ export const useMessages = () => {
         messages,
         messageStream,
         isMessaging,
+
+        chatContainerRef,
 
         handleFormSubmit,
     };
