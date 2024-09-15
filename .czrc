@@ -1,0 +1,10 @@
+{
+    "scopes": [
+        "web",
+        "config",
+        "fakerize",
+        "backend-aws",
+        "schemas-validator",
+        "db-model"
+    ]
+}

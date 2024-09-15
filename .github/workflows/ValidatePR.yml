@@ -1,0 +1,31 @@
+name: Validate PR
+
+on:
+    pull_request:
+        types:
+            - opened
+            - reopened
+            - synchronize
+            - edited
+
+permissions:
+    id-token: write
+    contents: read
+
+jobs:
+    Frontend:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup
+              uses: ./.github/actions/setup
+
+            - name: Lint
+              shell: bash
+              run: pnpm run lint
+
+            - name: Fmt
+              shell: bash
+              run: pnpm run fmt

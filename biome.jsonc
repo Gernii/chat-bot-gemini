@@ -1,0 +1,105 @@
+{
+    "$schema": "https://biomejs.dev/schemas/1.9.0/schema.json",
+    "organizeImports": {
+        "enabled": false
+    },
+    "linter": {
+        "enabled": true,
+
+        "rules": {
+            "all": true,
+            "suspicious": {
+                "noShadowRestrictedNames": "off",
+                "noReactSpecificProps": "off",
+                "noArrayIndexKey": "off"
+            },
+            "style": {
+                "noNamespaceImport": "off",
+                "useNamingConvention": "off",
+                "useFilenamingConvention": "off",
+                "noDefaultExport": "off"
+            },
+            "correctness": {
+                "noUndeclaredVariables": "off",
+                "noNodejsModules": "off",
+                "noUndeclaredDependencies": "off",
+                "useImportExtensions": "off"
+            },
+            "performance": {
+                "noBarrelFile": "off"
+            }
+        }
+    },
+    "formatter": {
+        "enabled": true,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineWidth": 100,
+        "lineEnding": "lf"
+    },
+
+    "json": {
+        "formatter": {
+            "trailingCommas": "none"
+        }
+    },
+
+    "files": {
+        "ignore": [
+            "node_modules",
+            "*.*js*",
+            "markdown-it-imsize",
+            "*.svelte",
+            "admin",
+            "types-bridge"
+        ]
+    },
+    "overrides": [
+        {
+            "include": ["index.ts"],
+            "linter": {
+                "rules": {
+                    "performance": {
+                        "noBarrelFile": "off",
+                        "noReExportAll": "off"
+                    }
+                }
+            }
+        },
+        {
+            "include": ["*.d.ts"],
+            "linter": {
+                "rules": {
+                    "recommended": true,
+                    "all": false,
+                    "correctness": {
+                        "noUndeclaredVariables": "off"
+                    },
+                    "style": {
+                        "noDefaultExport": "off",
+                        "noNamespace": "off"
+                    }
+                }
+            }
+        },
+        {
+            "include": ["*.nocheck.ts"],
+            "linter": {
+                "enabled": false
+            }
+        },
+        {
+            "include": ["routes/**/*.ts", "routes/**/*.tsx", "root.tsx"],
+            "linter": {
+                "rules": {
+                    "style": {
+                        "noDefaultExport": "off"
+                    },
+                    "a11y": {
+                        "noSvgWithoutTitle": "off"
+                    }
+                }
+            }
+        }
+    ]
+}
